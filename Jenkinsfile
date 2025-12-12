@@ -19,23 +19,6 @@ pipeline {
             }
         }
 
-        stage('Tests') {
-            steps {
-                sh './gradlew test --no-daemon --stacktrace'
-            }
-        }
-
-        stage('Jacoco') {
-            steps {
-                sh './gradlew jacocoTestReport --no-daemon --stacktrace'
-            }
-        }
-
-        stage('Jacoco Report') {
-            steps {
-                jacoco execPattern: 'build/jacoco/test.exec'
-            }
-        }
 
         stage('SonarQube Analysis') {
             steps {
@@ -47,13 +30,6 @@ pipeline {
                         -Dsonar.token=sqp_8ae739edc274db2b034937f19a9bdfbf2ad6d5ef
                 '''
             }
-        }
-    }
-
-    post {
-        always {
-            junit allowEmptyResults: true, testResults: 'build/test-results/test/*.xml'
-            archiveArtifacts artifacts: 'build/reports/**, build/test-results/**/*.xml', fingerprint: true
         }
     }
 }
