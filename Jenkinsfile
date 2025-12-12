@@ -3,8 +3,6 @@ pipeline {
     environment {
         HTTP_PROXY = 'http://proxy1-rech:3128'
         HTTPS_PROXY = 'http://proxy1-rech:3128'
-        GRADLE_OPTS = '-Dhttp.proxyHost=proxy1-rech -Dhttp.proxyPort=3128 -Dhttps.proxyHost=proxy1-rech -Dhttps.proxyPort=3128'
-        JAVA_TOOL_OPTIONS = '-Dhttp.proxyHost=proxy1-rech -Dhttp.proxyPort=3128 -Dhttps.proxyHost=proxy1-rech -Dhttps.proxyPort=3128'
     }
     stages {
         stage('Example') {
