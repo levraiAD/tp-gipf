@@ -10,7 +10,7 @@ pipeline {
                           -Dsonar.projectKey=tpControle \
                           -Dsonar.projectName=tpControle \
                           -Dsonar.host.url=http://localhost:9000 \
-                          -Dsonar.token=${SONAR_TOKEN ?: 'sqp_3a5f89e5e136e94a32d9edb31c6bcb064ea0d876'}
+                          -Dsonar.token=sqp_3a5f89e5e136e94a32d9edb31c6bcb064ea0d876
                     """
                 }
             }
