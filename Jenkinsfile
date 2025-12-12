@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build & SonarQube') {
             steps {
-                withSonarQubeEnv('My SonarQube Server') {
+                withSonarQubeEnv('SonarQubeServer') {
                     sh """
                         ./gradlew clean sonar \
                           -Dsonar.projectKey=tpControle \
