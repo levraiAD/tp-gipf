@@ -42,3 +42,13 @@ jar {
         attributes 'Main-Class': 'gipf.Main'
     }
 }
+plugins {
+    id "org.sonarqube" version "4.4.1.3373"
+}
+sonar {
+    properties {
+        property "sonar.projectKey", "tpControle"
+        property "sonar.projectName", "tpControle"
+        property "sonar.host.url", "http://[IP_OU_NOM_DU_SERVEUR_SONARQUBE]:9000"
+    }
+}
