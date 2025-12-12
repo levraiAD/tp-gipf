@@ -17,6 +17,16 @@ pipeline {
                 sh './gradlew build'
             }
         }
+        stage('Jacoco') {
+            steps {
+                sh 'mvn test'
+                }
+            }
+        stage('Jacoco Report') {
+            steps {
+                jacoco execPattern: 'target/jacoco.exec'
+                }
+            }
 
         stage('SonarQube Analysis') {
             steps {
