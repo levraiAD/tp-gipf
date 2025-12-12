@@ -41,4 +41,10 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            junit 'build/test-results/test/*.xml'
+            archiveArtifacts artifacts: 'build/reports/**, build/test-results/**/*.xml', fingerprint: true
+        }
+    }
 }
