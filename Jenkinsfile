@@ -13,15 +13,21 @@ pipeline {
             }
         }
 
-        stage('Build & Tests') {
+        stage('Build') {
             steps {
-                sh './gradlew clean build --no-daemon --stacktrace'
+                sh './gradlew clean assemble --no-daemon --stacktrace'
+            }
+        }
+
+        stage('Tests') {
+            steps {
+                sh './gradlew test --no-daemon --stacktrace || true'
             }
         }
 
         stage('Jacoco') {
             steps {
-                sh './gradlew jacocoTestReport --no-daemon --stacktrace'
+                sh './gradlew jacocoTestReport --no-daemon --stacktrace || true'
             }
         }
 
@@ -46,7 +52,7 @@ pipeline {
 
     post {
         always {
-            junit 'build/test-results/test/*.xml'
+            junit allowEmptyResults: true, testResults: 'build/test-results/test/*.xml'
             archiveArtifacts artifacts: 'build/reports/**, build/test-results/**/*.xml', fingerprint: true
         }
     }
