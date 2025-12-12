@@ -10,6 +10,7 @@
 
 plugins {
     id 'org.liquibase.gradle' version '2.2.0'
+    id "org.sonarqube" version "4.4.1.3373"
 }
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
@@ -42,13 +43,13 @@ jar {
         attributes 'Main-Class': 'gipf.Main'
     }
 }
-plugins {
-    id "org.sonarqube" version "4.4.1.3373"
-}
-sonar {
+
+sonarqube {
     properties {
         property "sonar.projectKey", "tpControle"
         property "sonar.projectName", "tpControle"
-        property "sonar.host.url", "http://[IP_OU_NOM_DU_SERVEUR_SONARQUBE]:9000"
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.sources", "src/main/java"
     }
 }
+
