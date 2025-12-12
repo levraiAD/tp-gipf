@@ -1,9 +1,11 @@
 pipeline {
     agent any
+
     environment {
-        HTTP_PROXY = 'http://proxy1-rech:3128'
+        HTTP_PROXY  = 'http://proxy1-rech:3128'
         HTTPS_PROXY = 'http://proxy1-rech:3128'
     }
+
     stages {
         stage('Example') {
             steps {
@@ -11,21 +13,23 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build & Tests') {
             steps {
-                sh './gradlew build --no-daemon --stacktrace'
+                sh './gradlew clean build --no-daemon --stacktrace'
             }
         }
+
         stage('Jacoco') {
             steps {
-                sh 'mvn test'
-                }
+                sh './gradlew jacocoTestReport --no-daemon --stacktrace'
             }
+        }
+
         stage('Jacoco Report') {
             steps {
-                jacoco execPattern: 'target/jacoco.exec'
-                }
+                jacoco execPattern: 'build/jacoco/test.exec'
             }
+        }
 
         stage('SonarQube Analysis') {
             steps {
@@ -39,6 +43,7 @@ pipeline {
             }
         }
     }
+
     post {
         always {
             junit 'build/test-results/test/*.xml'
