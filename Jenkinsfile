@@ -21,13 +21,13 @@ pipeline {
 
         stage('Tests') {
             steps {
-                sh './gradlew test --no-daemon --stacktrace || true'
+                sh './gradlew test --no-daemon --stacktrace'
             }
         }
 
         stage('Jacoco') {
             steps {
-                sh './gradlew jacocoTestReport --no-daemon --stacktrace || true'
+                sh './gradlew jacocoTestReport --no-daemon --stacktrace'
             }
         }
 
