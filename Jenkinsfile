@@ -9,6 +9,10 @@ pipeline {
         }
 
         stage('Build') {
+            environment{
+                HTTP_PROXY = 'http://proxy1-rech:3128'
+                HTTPS_PROXY = 'http://proxy1-rech:3128'
+            }
             steps {
                 sh './gradlew build'
             }
